@@ -25,3 +25,11 @@ func TestGetChart(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, res)
 }
+
+func TestGetAutocompleteResultSet(t *testing.T) {
+	res, err := client.GetAutocompleteResultSet(&yfinance.GetAutocompleteResultSetParams{
+		Query: "apple",
+	})
+	assert.NoError(t, err)
+	assert.NotNil(t, res)
+}

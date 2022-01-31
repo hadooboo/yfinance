@@ -16,7 +16,8 @@ const (
 	yahooFinanceAPIURL = "https://query2.finance.yahoo.com"
 	defaultTimeout     = 30 * time.Second
 
-	getChartPath = "/v8/finance/chart"
+	getChartPath                 = "/v8/finance/chart"
+	getAutocompleteResultSetPath = "/v6/finance/autocomplete"
 )
 
 type Client struct {
@@ -160,5 +161,43 @@ func (r *getChartResp) UnmarshalJSON(data []byte) error {
 
 	r.Meta = v.Meta
 	r.Candles = candles
+	return nil
+}
+
+func (r *Client) GetAutocompleteResultSet(params *GetAutocompleteResultSetParams) (*AutocompleteResultSet, error) {
+	queryParams := &url.Values{}
+	queryParams.Set("query", params.Query)
+	queryParams.Set("lang", "en")
+
+	resp := new(getAutocompleteResultSetResp)
+	if err := r.get(getAutocompleteResultSetPath, "", queryParams, resp); err != nil {
+		return nil, err
+	}
+
+	return &AutocompleteResultSet{
+		Results: resp.Results,
+	}, nil
+}
+
+type GetAutocompleteResultSetParams struct {
+	Query string
+}
+
+type getAutocompleteResultSetResp struct {
+	Results []*AutocompleteResult
+}
+
+func (r *getAutocompleteResultSetResp) UnmarshalJSON(data []byte) error {
+	autocompleteResultSet := struct {
+		ResultSet *struct {
+			Query  string                `json:"Query"`
+			Result []*AutocompleteResult `json:"Result"`
+		} `json:"ResultSet"`
+	}{}
+	if err := json.Unmarshal(data, &autocompleteResultSet); err != nil {
+		return err
+	}
+
+	r.Results = autocompleteResultSet.ResultSet.Result
 	return nil
 }

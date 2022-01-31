@@ -96,3 +96,14 @@ const (
 	InstrumentTypeIndex          InstrumentType = "INDEX"
 	InstrumentTypeOption         InstrumentType = "OPTION"
 )
+
+type AutocompleteResultSet struct {
+	Results []*AutocompleteResult
+}
+
+type AutocompleteResult struct {
+	Symbol             string `json:"symbol"`
+	Name               string `json:"name"`
+	ExchangeDisp       string `json:"exchDisp"`
+	InstrumentTypeDisp string `json:"typeDisp"`
+}
