@@ -67,7 +67,12 @@ func (r *Client) get(path, pathParam string, queryParams *url.Values, v interfac
 func (r *Client) GetChart(params *GetChartParams) (*Chart, error) {
 	pathParam := params.Ticker
 	queryParams := &url.Values{}
-	queryParams.Set("range", string(params.Range))
+	if params.Range == DataRangeMax {
+		queryParams.Set("period1", "0")
+		queryParams.Set("period2", fmt.Sprintf("%v", time.Now().Unix()))
+	} else {
+		queryParams.Set("range", string(params.Range))
+	}
 	queryParams.Set("interval", string(params.Interval))
 
 	resp := new(getChartResp)
