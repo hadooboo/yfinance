@@ -105,14 +105,14 @@ func (r *getChartResp) UnmarshalJSON(data []byte) error {
 				Timestamp  []int64    `json:"timestamp"`
 				Indicators *struct {
 					Quote []*struct {
-						Open   []*decimal.Decimal `json:"open"`
-						High   []*decimal.Decimal `json:"high"`
-						Low    []*decimal.Decimal `json:"low"`
-						Close  []*decimal.Decimal `json:"close"`
-						Volume []int64            `json:"volume"`
+						Open   []decimal.Decimal `json:"open"`
+						High   []decimal.Decimal `json:"high"`
+						Low    []decimal.Decimal `json:"low"`
+						Close  []decimal.Decimal `json:"close"`
+						Volume []int64           `json:"volume"`
 					} `json:"quote"`
 					Adjclose []*struct {
-						Adjclose []*decimal.Decimal `json:"adjclose"`
+						Adjclose []decimal.Decimal `json:"adjclose"`
 					} `json:"adjclose,omitempty"`
 				} `json:"indicators"`
 			} `json:"result"`

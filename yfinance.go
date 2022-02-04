@@ -10,30 +10,30 @@ type Chart struct {
 }
 
 type ChartCandle struct {
-	Open      *decimal.Decimal
-	High      *decimal.Decimal
-	Low       *decimal.Decimal
-	Close     *decimal.Decimal
-	Adjclose  *decimal.Decimal
+	Open      decimal.Decimal
+	High      decimal.Decimal
+	Low       decimal.Decimal
+	Close     decimal.Decimal
+	Adjclose  decimal.Decimal
 	Volume    int64
 	Timestamp int64
 }
 
 type ChartMeta struct {
-	Currency             string           `json:"currency"`
-	Symbol               string           `json:"symbol"`
-	ExchangeName         string           `json:"exchangeName"`
-	InstrumentType       InstrumentType   `json:"instrumentType"`
-	FirstTradeDate       int64            `json:"firstTradeDate"`
-	RegularMarketTime    int64            `json:"regularMarketTime"`
-	Gmtoffset            int              `json:"gmtoffset"`
-	Timezone             string           `json:"timezone"`
-	ExchangeTimezoneName string           `json:"exchangeTimezoneName"`
-	RegularMarketPrice   *decimal.Decimal `json:"regularMarketPrice"`
-	ChartPreviousClose   *decimal.Decimal `json:"chartPreviousClose"`
-	PreviousClose        *decimal.Decimal `json:"previousClose"`
-	Scale                int              `json:"scale"`
-	PriceHint            int              `json:"priceHint"`
+	Currency             string          `json:"currency"`
+	Symbol               string          `json:"symbol"`
+	ExchangeName         string          `json:"exchangeName"`
+	InstrumentType       InstrumentType  `json:"instrumentType"`
+	FirstTradeDate       int64           `json:"firstTradeDate"`
+	RegularMarketTime    int64           `json:"regularMarketTime"`
+	Gmtoffset            int             `json:"gmtoffset"`
+	Timezone             string          `json:"timezone"`
+	ExchangeTimezoneName string          `json:"exchangeTimezoneName"`
+	RegularMarketPrice   decimal.Decimal `json:"regularMarketPrice"`
+	ChartPreviousClose   decimal.Decimal `json:"chartPreviousClose"`
+	PreviousClose        decimal.Decimal `json:"previousClose"`
+	Scale                int             `json:"scale"`
+	PriceHint            int             `json:"priceHint"`
 	CurrentTradingPeriod *struct {
 		Pre     *TradingPeriod `json:"pre"`
 		Regular *TradingPeriod `json:"regular"`
