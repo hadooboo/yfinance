@@ -5,7 +5,16 @@ import (
 	"testing"
 
 	"github.com/hadooboo/yfinance"
-	"github.com/stretchr/testify/assert"
+)
+
+const (
+	TestETFSymbol            = "VOO"
+	TestEquitySymbol         = "AAPL"
+	TestMutualFundSymbol     = "VFINX"
+	TestCurrencySymbol       = "KRW=X"
+	TestCryptoCurrencySymbol = "BTC-USD"
+	TestFutureSymbol         = "GC=F"
+	TestIndexSymbol          = "^GSPC"
 )
 
 var client *yfinance.Client
@@ -14,30 +23,4 @@ func TestMain(m *testing.M) {
 	client = yfinance.New()
 	code := m.Run()
 	os.Exit(code)
-}
-
-func TestGetChart(t *testing.T) {
-	res, err := client.GetChart(&yfinance.GetChartParams{
-		Range:    yfinance.DataRange1y,
-		Interval: yfinance.DataGranularity1d,
-		Ticker:   "AAPL",
-	})
-	assert.NoError(t, err)
-	assert.NotNil(t, res)
-
-	res, err = client.GetChart(&yfinance.GetChartParams{
-		Range:    yfinance.DataRangeMax,
-		Interval: yfinance.DataGranularity1mo,
-		Ticker:   "MSFT",
-	})
-	assert.NoError(t, err)
-	assert.NotNil(t, res)
-}
-
-func TestGetAutocompleteResultSet(t *testing.T) {
-	res, err := client.GetAutocompleteResultSet(&yfinance.GetAutocompleteResultSetParams{
-		Query: "apple",
-	})
-	assert.NoError(t, err)
-	assert.NotNil(t, res)
 }
